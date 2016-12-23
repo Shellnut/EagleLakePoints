@@ -1,0 +1,106 @@
+<h1>Edit Teams and Counselors</h1>
+<div class="panel panel-default">
+  <div class="panel-heading">
+    <div class="h4">
+      <button ng-click="$ctrl.editBigTeams()" class="btn btn-default btn-xs"><i class="fa fa-pencil"></i></button> Big Teams: {{$ctrl.bigTeamNames.team1}} vs {{$ctrl.bigTeamNames.team2}}
+    </div>
+  </div>
+</div>
+<div class="row">
+  <div class="col-sm-6">
+    <div class="panel panel-default">
+      <div class="panel-heading clearfix">
+        <b class="pull-left">Counselors</b>
+        <a ng-click="$ctrl.addCounselor()" class="pull-right"><i class="fa fa-plus-circle"></i> Add Counselor</a>
+      </div>
+      <div class="panel-body">
+        <table class="table table-striped" style="margin-top: 15px">
+          <tr>
+            <th></th>
+            <th>Name</th>
+            <th>Years Experience</th>
+            <th>
+              <a ng-if="$ctrl.counselorLock" ng-click="$ctrl.counselorLock = !$ctrl.counselorLock" href="">
+                <i class="fa fa-lock"></i>
+              </a>
+              <a ng-if="!$ctrl.counselorLock" ng-click="$ctrl.counselorLock = !$ctrl.counselorLock" href="">
+                <i class="fa fa-unlock"></i>
+              </a>
+            </th>
+          </tr>
+          <tr ng-repeat="counselor in $ctrl.counselors">
+            <td>
+              <button class="btn btn-xs btn-default"
+                      ng-click="($index === $ctrl.counselorEdit) ? $ctrl.counselorEdit = -1 : $ctrl.counselorEdit = $index">
+                <i ng-if="$ctrl.counselorEdit !== $index" class="fa fa-pencil"></i>
+                <i ng-if="$ctrl.counselorEdit === $index" class="fa fa-save"></i>
+              </button>
+            </td>
+            <td>
+              <span ng-if="$ctrl.counselorEdit !== $index">{{counselor.firstName}} {{counselor.lastName}}</span>
+              <span ng-if="$ctrl.counselorEdit === $index">
+                <span>First Name</span>
+                <input ng-change="$ctrl.editCounselor(counselor, $index)"
+                       ng-model-options="{ updateOn: 'default blur', debounce: { 'default': 1500, 'blur': 0 } }"
+                       type="text" class="form-control"
+                       ng-model="counselor.firstName"/>
+                <span>Last Name</span>
+                <input ng-change="$ctrl.editCounselor(counselor, $index)"
+                       ng-model-options="{ updateOn: 'default blur', debounce: { 'default': 1500, 'blur': 0 } }"
+                       type="text"
+                       class="form-control"
+                       ng-model="counselor.lastName"/>
+              </span>
+            </td>
+            <td>
+              <span ng-if="$ctrl.counselorEdit !== $index">{{counselor.years}}</span>
+              <span ng-if="$ctrl.counselorEdit === $index">
+                <span>Years</span>
+                <select class="form-control"
+                           ng-change="$ctrl.editCounselor(counselor, $index)"
+                           ng-model="counselor.years">
+                  <option ng-repeat="val in ['First Year', 'Second Year', 'Third or more']">{{val}}</option>
+                </select>
+            </span>
+            <td>
+              <button ng-disabled="$ctrl.counselorLock" class="btn btn-danger btn-xs" ng-click="$ctrl.removeCounselor(counselor, $index)">
+                <i class="fa fa-trash-o"></i>
+              </button>
+            </td>
+          </tr>
+        </table>
+      </div>
+    </div>
+  </div>
+  <div class="col-sm-6">
+    <div class="panel panel-default">
+      <div class="panel-heading clearfix">
+        <b class="pull-left">Small Teams</b>
+        <a ng-click="$ctrl.addSmallTeam()" class="pull-right"><i class="fa fa-plus-circle"></i> Add Small Team</a>
+      </div>
+      <div class="panel-body">
+        <table class="table table-striped" style="margin-top: 15px">
+          <tr>
+            <th>Name</th>
+            <th>
+              <a ng-if="$ctrl.smallTeamLock" ng-click="$ctrl.smallTeamLock = !$ctrl.smallTeamLock" href="">
+                <i class="fa fa-lock"></i>
+              </a>
+              <a ng-if="!$ctrl.smallTeamLock" ng-click="$ctrl.smallTeamLock = !$ctrl.smallTeamLock" href="">
+                <i class="fa fa-unlock"></i>
+              </a>
+            </th>
+          </tr>
+          <tr ng-repeat="smallTeam in $ctrl.smallTeams">
+            <td>{{smallTeam.name}}</td>
+            <td>
+              <button ng-disabled="$ctrl.smallTeamLock" class="btn btn-danger btn-xs" ng-click="$ctrl.removeSmallTeam(smallTeam, $index)">
+                <i class="fa fa-trash-o"></i>
+              </button>
+            </td>
+          </tr>
+        </table>
+      </div>
+    </div>
+  </div>
+</div>

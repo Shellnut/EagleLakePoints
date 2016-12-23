@@ -1,0 +1,21 @@
+div.ui-grid-class-primary {
+  background-color: #d9edf7 !important;
+  border-bottom: 1px solid #ddd;
+}
+
+div.ui-grid-class-success {
+  background-color: #dff0d8 !important;
+  border-bottom: 1px solid #ddd;
+
+}
+
+div.ui-grid-class-danger {
+  background-color: #f2dede !important;
+  border-bottom: 1px solid #ddd;
+
+}
+
+div.ui-grid-class-warning {
+  background-color: #fcf8e3 !important;
+  border-bottom: 1px solid #ddd;
+}

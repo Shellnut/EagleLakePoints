@@ -1,0 +1,60 @@
+<!-- Modal content-->
+<div class="modal-content">
+  <div class="modal-header">
+    <h4 class="modal-title"><i class="fa fa-pencil"></i> Edit Small Team</h4>
+  </div>
+  <div class="modal-body">
+    <form name="userForm" novalidate> <!-- novalidate prevents HTML5 validation since we will be validating ourselves -->
+      <div class="form-group">
+        <label>Select Big Team</label>
+        <select class="form-control"
+                ng-model="$ctrl.data.bigTeam"
+                required>
+          <option>{{$ctrl.bigTeamNames.team1}}</option>
+          <option>{{$ctrl.bigTeamNames.team2}}</option>
+        </select>
+      </div>
+      <div class="form-group">
+        <label>Select Small Team</label>
+        <select class="form-control"
+                ng-model="$ctrl.data.smallTeam"
+                required>
+          <option ng-repeat="val in $ctrl.smallTeams">{{val.name}}</option>
+        </select>
+      </div>
+      <!--COUNSELORS-->
+      <div class="form-group">
+        <label>Select Counselors</label>
+        <div class="row">
+          <div class="col-xs-6">
+            <ul style="list-style-type: none">
+              <li ng-repeat="val in $ctrl.counselors" ng-if="$even">
+                <input type="checkbox" ng-model="$ctrl.checkboxes['val'+$index]" ng-change="$ctrl.addCounselor($ctrl.checkboxes['val'+$index], val)"> {{val.firstName}} {{val.lastName}}
+              </li>
+            </ul>
+          </div>
+          <div class="col-xs-6">
+            <ul style="list-style-type: none">
+              <li ng-repeat="val in $ctrl.counselors" ng-if="$odd">
+                <input type="checkbox" ng-model="$ctrl.checkboxes['val'+$index]" ng-change="$ctrl.addCounselor($ctrl.checkboxes['val'+$index], val)"> {{val.firstName}} {{val.lastName}}
+              </li>
+            </ul>
+          </div>
+        </div>
+      </div>
+      <!-- SUBMIT BUTTON -->
+      <button ng-click="$ctrl.ok($ctrl.data)"
+              ng-disabled="userForm.$invalid"
+              type="submit"
+              class="btn btn-primary">
+        <span>Submit</span>
+      </button>
+      <!--CANCEL-->
+      <button ng-click="$ctrl.cancel()"
+              type="submit"
+              class="btn btn-danger">
+        <span>Cancel</span>
+      </button>
+    </form>
+  </div>
+</div>

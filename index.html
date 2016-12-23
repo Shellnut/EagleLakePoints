@@ -1,0 +1,47 @@
+<!doctype html>
+<html ng-app="myApp">
+
+  <head>
+    <link rel="stylesheet" href="bower_components/bootstrap/dist/css/bootstrap.min.css">
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css">
+    <link rel="stylesheet" href="bower_components/angular-bootstrap/ui-bootstrap-csp.css">
+    <link rel="stylesheet" href="bower_components/angular-ui-grid/ui-grid.min.css">
+    <link rel="stylesheet" href="main.css">
+  </head>
+
+  <body class="container-fluid" ng-controller="myCtrl as $ctrl">
+    <nav class="navbar navbar-default">
+      <a class="navbar-brand" href=""><b>Eagle Lake 2017</b></a>
+      <div class="container-fluid">
+        <ul class="nav navbar-nav">
+          <li ng-class="{ 'active': $ctrl.tab === 0 }" ng-click="$ctrl.changeTab(0)"><a href="#">Weekly Summary</a></li>
+          <li ng-class="{ 'active': $ctrl.tab === 1 }" ng-click="$ctrl.changeTab(1)" ng-if="$ctrl.admin"><a href="#">Edit Teams</a></li>
+          <li ng-class="{ 'active': $ctrl.tab === 2 }" ng-click="$ctrl.changeTab(2)" ng-if="$ctrl.admin"><a href="#">Edit Points</a></li>
+          <li ng-class="{ 'active': $ctrl.tab === 3 }" ng-click="$ctrl.changeTab(3)"><a href="#">Readme</a></li>
+        </ul>
+        <ul class="nav navbar-nav navbar-right">
+          <li ng-if="$ctrl.admin" ng-click="$ctrl.logout()"><a href="">Admin</a></li>
+          <li ng-if="!$ctrl.admin" ng-click="$ctrl.login()"><a href="">Login</a></li>
+        </ul>
+      </div>
+    </nav>
+
+    <dashboard-component ng-if="$ctrl.tab === 0"></dashboard-component>
+    <admin-component ng-if="$ctrl.tab === 1"></admin-component>
+    <admin-component-points ng-if="$ctrl.tab === 2"></admin-component-points>
+    <readme-component ng-if="$ctrl.tab === 3"></readme-component>
+
+    <script src="bower_components/angular/angular.min.js"></script>
+    <script src="bower_components/angular-bootstrap/ui-bootstrap.min.js"></script>
+    <script src="bower_components/angular-bootstrap/ui-bootstrap-tpls.js"></script>
+    <script src="bower_components/angular-ui-grid/ui-grid.js"></script>
+    <script src="app.js"></script>
+    <script src="services/myService.js"></script>
+    <script src="components/dashboard-component.js"></script>
+    <script src="components/admin-component.js"></script>
+    <script src="components/admin-component-points.js"></script>
+    <script src="components/readme-component.js"></script>
+
+  </body>
+
+</html>

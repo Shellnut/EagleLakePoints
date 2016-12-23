@@ -1,0 +1,17 @@
+{
+  "name": "mongoLabTest",
+  "homepage": "https://github.com/Shellnut/mongoLabTest",
+  "authors": [
+    "Kenny <shellnut@gmail.com>"
+  ],
+  "description": "",
+  "main": "",
+  "license": "MIT",
+  "ignore": [
+    "**/.*",
+    "node_modules",
+    "bower_components",
+    "test",
+    "tests"
+  ]
+}

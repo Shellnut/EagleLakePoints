@@ -1,0 +1,132 @@
+<h1>Admin - Edit Week {{$ctrl.week}}</h1>
+<table class="table">
+  <tr>
+    <th ng-repeat="heading in $ctrl.headings">
+      <span ng-if="$index!==$ctrl.headings.length-1">{{heading.val}}</span>
+      <span ng-if="$index===$ctrl.headings.length-1">
+        <a ng-if="$ctrl.lock" href="" ng-click="$ctrl.lock=!$ctrl.lock"><i class="fa fa-lock"></i></a>
+        <a ng-if="!$ctrl.lock" href="" ng-click="$ctrl.lock=!$ctrl.lock"><i class="fa fa-unlock"></i></a>
+      </span>
+    </th>
+  </tr>
+  <tr ng-repeat="val in $ctrl['week' + $ctrl.week] | orderBy: 'bigTeam' : true" ng-class="(val.bigTeam === $ctrl.team1) ? 'success' : (val.bigTeam === $ctrl.team2) ? 'danger' : 'info'">
+    <td>
+      <button ng-click="($ctrl.edit === $index) ? $ctrl.edit=-1 : $ctrl.edit=$index" class="btn btn-default btn-xs">
+        <i ng-if="$ctrl.edit!==$index" class="fa fa-pencil"></i>
+        <i ng-if="$ctrl.edit===$index" class="fa fa-save"></i>
+      </button>
+    </td>
+    <td>
+      <span ng-if="$ctrl.edit!==$index">{{val.bigTeam}}</span>
+      <span ng-if="$ctrl.edit===$index"><button class="btn btn-default btn-xs" ng-click="$ctrl.editSmallTeamWeek(val)"><i class="fa fa-pencil"></i></button> {{val.bigTeam}}</span>
+    </td>
+    <td>
+      <span ng-if="$ctrl.edit!==$index">{{val.smallTeam}}</span>
+      <span ng-if="$ctrl.edit===$index"><button class="btn btn-default btn-xs" ng-click="$ctrl.editSmallTeamWeek(val)"><i class="fa fa-pencil"></i></button> {{val.smallTeam}}</span>
+    </td>
+    <td>
+      <span ng-if="$ctrl.edit!==$index">{{val.counselors.length ? val.counselors : [''] | arrayToString}}</span>
+      <span ng-if="$ctrl.edit===$index"><button class="btn btn-default btn-xs" ng-click="$ctrl.editSmallTeamWeek(val)"><i class="fa fa-pencil"></i></button> {{val.counselors.length ? val.counselors : [''] | arrayToString}}</span>
+    </td>
+    <td>
+      <span ng-if="$ctrl.edit!==$index">{{val.cabin.monday + val.cabin.tuesday + val.cabin.wednesday | number: 0}}</span>
+      <span ng-if="$ctrl.edit===$index">
+        <div class="input-group" title="Monday Cabin Points">
+          <span class="input-group-addon" id="add1">1</span>
+          <input ng-change="$ctrl.updateSmallTeam(val)" ng-model-options="{ updateOn: 'default blur', debounce: { 'default': 1500, 'blur': 0 } }" type="number" ng-model="val.cabin.monday" class="form-control" aria-describedby="add1">
+        </div>
+         <div class="input-group" title="Tuesday Cabin Points">
+          <span class="input-group-addon" id="add2">2</span>
+          <input ng-change="$ctrl.updateSmallTeam(val)" ng-model-options="{ updateOn: 'default blur', debounce: { 'default': 1500, 'blur': 0 } }"type="number" ng-model="val.cabin.tuesday" class="form-control" aria-describedby="add2">
+        </div>
+         <div class="input-group" title="Wednesday Cabin Points">
+          <span class="input-group-addon" id="add3">3</span>
+          <input ng-change="$ctrl.updateSmallTeam(val)" ng-model-options="{ updateOn: 'default blur', debounce: { 'default': 1500, 'blur': 0 } }"type="number" ng-model="val.cabin.wednesday" class="form-control" aria-describedby="add3">
+        </div>
+      </span>
+    </td>
+    <td>
+      <span ng-if="$ctrl.edit!==$index">{{val.cheer.monday + val.cheer.tuesday + val.cheer.wednesday | number: 0}}</span>
+      <span ng-if="$ctrl.edit===$index">
+        <div class="input-group" title="Monday Cheer Points">
+          <span class="input-group-addon" id="add4">1</span>
+          <input ng-change="$ctrl.updateSmallTeam(val)" ng-model-options="{ updateOn: 'default blur', debounce: { 'default': 1500, 'blur': 0 } }"type="number" ng-model="val.cheer.monday" class="form-control" aria-describedby="add4">
+        </div>
+         <div class="input-group" title="Tuesday Cheer Points">
+          <span class="input-group-addon" id="add5">2</span>
+          <input ng-change="$ctrl.updateSmallTeam(val)" ng-model-options="{ updateOn: 'default blur', debounce: { 'default': 1500, 'blur': 0 } }"type="number" ng-model="val.cheer.tuesday" class="form-control" aria-describedby="add5">
+        </div>
+         <div class="input-group" title="Wednesday Cheer Points">
+          <span class="input-group-addon" id="add6">3</span>
+          <input ng-change="$ctrl.updateSmallTeam(val)" ng-model-options="{ updateOn: 'default blur', debounce: { 'default': 1500, 'blur': 0 } }"type="number" ng-model="val.cheer.wednesday" class="form-control" aria-describedby="add6">
+        </div>
+      </span>
+    </td>
+    <td>
+      <span ng-if="$ctrl.edit!==$index">{{val.ctf | number: 0}}</span>
+      <span ng-if="$ctrl.edit===$index">
+
+       <div class="input-group" title="Team CTF Points">
+          <span class="input-group-addon" id="add7"><i class="fa fa-flag" aria-hidden="true"></i></span>
+          <input ng-change="$ctrl.updateSmallTeam(val)" ng-model-options="{ updateOn: 'default blur', debounce: { 'default': 1500, 'blur': 0 } }"type="number" ng-model="val.ctf" class="form-control" aria-describedby="add7">
+        </div>
+      </span>
+    </td>
+    <td>
+      <span ng-if="$ctrl.edit!==$index">{{val.maximus.cheer + val.maximus.race | number: 0}}</span>
+      <span ng-if="$ctrl.edit===$index">
+        <div class="input-group" title="Maximus Cheer Points">
+          <span class="input-group-addon" id="add8"><i class="fa fa-volume-up"></i></span>
+          <input ng-change="$ctrl.updateSmallTeam(val)" ng-model-options="{ updateOn: 'default blur', debounce: { 'default': 1500, 'blur': 0 } }"type="number" ng-model="val.maximus.cheer" class="form-control" aria-describedby="add8">
+        </div>
+         <div class="input-group" title="Maximus Race Points">
+          <span class="input-group-addon" id="add9"><i class="fa fa-flag-checkered"></i></span>
+          <input ng-change="$ctrl.updateSmallTeam(val)" ng-model-options="{ updateOn: 'default blur', debounce: { 'default': 1500, 'blur': 0 } }"type="number" ng-model="val.maximus.race" class="form-control" aria-describedby="add9">
+        </div>
+      </span>
+    </td>
+    <td>
+      <span ng-if="$ctrl.edit!==$index">{{val.trash * 10 | number: 0}}</span>
+      <span ng-if="$ctrl.edit===$index">
+        <div class="input-group" title="Number of Pieces of Trash">
+          <span class="input-group-addon" id="add10"><i class="fa fa-trash"></i></span>
+          <input ng-change="$ctrl.updateSmallTeam(val)" ng-model-options="{ updateOn: 'default blur', debounce: { 'default': 1500, 'blur': 0 } }"type="number" ng-model="val.trash" class="form-control" aria-describedby="add10">
+        </div>
+        <b>Total: {{val.trash * 10 | number: 0}} pts</b>
+      </span>
+    </td>
+    <td>
+      <span ng-if="$ctrl.edit!==$index">{{$ctrl.scriptureMath(val.scripture) | number: 0}}</span>
+      <span ng-if="$ctrl.edit===$index">
+        <div class="input-group" title="Number of Verses">
+          <span class="input-group-addon" id="add11"><i class="fa fa-files-o"></i></span>
+          <input ng-change="$ctrl.updateSmallTeam(val)" ng-model-options="{ updateOn: 'default blur', debounce: { 'default': 1500, 'blur': 0 } }"type="number" ng-model="val.scripture.verses" class="form-control" aria-describedby="add11">
+        </div>
+         <div class="input-group" title="Number of Campers">
+          <span class="input-group-addon" id="add12"><i class="fa fa-users"></i></span>
+          <input ng-change="$ctrl.updateSmallTeam(val)" ng-model-options="{ updateOn: 'default blur', debounce: { 'default': 1500, 'blur': 0 } }"type="number" ng-model="val.scripture.campers" class="form-control" aria-describedby="add12">
+        </div>
+        <b>Total: {{$ctrl.scriptureMath(val.scripture) | number: 0}}</b>
+      </span>
+    </td>
+    <td><b>{{$ctrl.totalMath(val) | number: 0}}</b></td>
+    <td>
+      <button ng-click="$ctrl.removeSmallTeam(val, index)"
+              ng-disabled="$ctrl.lock"
+              class="btn btn-danger btn-xs">
+        <i class="fa fa-trash"></i>
+      </button>
+    </td>
+  </tr>
+</table>
+<a href="" ng-click="$ctrl.addSmallTeamWeek()"> <i class="fa fa-plus-circle"></i> Add small team</a>
+<div class="text-center footer navbar-fixed-bottom" style="background: rgb(238,238,238)">
+  <ul class="pagination">
+    <li ng-repeat="i in [1,2,3,4,5,6,7,8,9,10]"
+        ng-class="{'active': i===$ctrl.week}"
+        ng-click="$ctrl.changeWeek(i)">
+      <a href="#">Week {{i}}</a></li>
+  </ul>
+</div>
+<br><br><br>
+<br><br><br>

@@ -1,0 +1,56 @@
+<h1>Week {{$ctrl.week}} Summary</h1>
+<div class="row">
+  <div class="col-sm-4">
+    <div class="panel panel-default panel-success">
+      <div class="panel-heading"><b><i class="fa fa-trophy"></i> Total</b></div>
+      <div class="panel-body">
+        <span ng-if="$ctrl.bigTeamTotal.team1.total >= $ctrl.bigTeamTotal.team2.total"><b>1st</b> {{$ctrl.bigTeamTotal.team1.name}}: {{$ctrl.bigTeamTotal.team1.total | number:0}} pts</span>
+        <span ng-if="$ctrl.bigTeamTotal.team1.total <= $ctrl.bigTeamTotal.team2.total"><b>1st</b> {{$ctrl.bigTeamTotal.team2.name}}: {{$ctrl.bigTeamTotal.team2.total | number:0}} pts</span>
+        <br>
+        <span ng-if="$ctrl.bigTeamTotal.team1.total > $ctrl.bigTeamTotal.team2.total"><b>2nd</b> {{$ctrl.bigTeamTotal.team2.name}}: {{$ctrl.bigTeamTotal.team2.total | number:0}} pts</span>
+        <span ng-if="$ctrl.bigTeamTotal.team1.total < $ctrl.bigTeamTotal.team2.total"><b>2nd</b> {{$ctrl.bigTeamTotal.team1.name}}: {{$ctrl.bigTeamTotal.team1.total | number:0}} pts</span>
+      </div>
+    </div>
+  </div>
+  <div class="col-sm-4">
+    <div class="panel panel-default panel-info">
+      <div class="panel-heading"><b><i class="fa fa-home"></i> Cabin Total</b></div>
+      <div class="panel-body">
+        <span ng-if="$ctrl.bigTeamTotal.team1.cabinTotal >= $ctrl.bigTeamTotal.team2.cabinTotal"><b>1st</b> {{$ctrl.bigTeamTotal.team1.name}}: {{$ctrl.bigTeamTotal.team1.cabinTotal | number:0}} pts</span>
+        <span ng-if="$ctrl.bigTeamTotal.team1.cabinTotal <= $ctrl.bigTeamTotal.team2.cabinTotal"><b>1st</b> {{$ctrl.bigTeamTotal.team2.name}}: {{$ctrl.bigTeamTotal.team2.cabinTotal | number:0}} pts</span>
+        <br>
+        <span ng-if="$ctrl.bigTeamTotal.team1.cabinTotal > $ctrl.bigTeamTotal.team2.cabinTotal"><b>2nd</b> {{$ctrl.bigTeamTotal.team2.name}}: {{$ctrl.bigTeamTotal.team2.cabinTotal | number:0}} pts</span>
+        <span ng-if="$ctrl.bigTeamTotal.team1.cabinTotal < $ctrl.bigTeamTotal.team2.cabinTotal"><b>2nd</b> {{$ctrl.bigTeamTotal.team1.name}}: {{$ctrl.bigTeamTotal.team1.cabinTotal | number:0}} pts</span>
+      </div>
+    </div>
+  </div>
+  <div class="col-sm-4">
+    <div class="panel panel-default panel-warning">
+      <div class="panel-heading"><b><i class="fa fa-copy"></i> Scripture Total</b></div>
+      <div class="panel-body">
+        <span ng-if="$ctrl.bigTeamTotal.team1.scriptureTotal >= $ctrl.bigTeamTotal.team2.scriptureTotal"><b>1st</b> {{$ctrl.bigTeamTotal.team1.name}}: {{$ctrl.bigTeamTotal.team1.scriptureTotal | number:0}} pts</span>
+        <span ng-if="$ctrl.bigTeamTotal.team1.scriptureTotal <= $ctrl.bigTeamTotal.team2.scriptureTotal"><b>1st</b> {{$ctrl.bigTeamTotal.team2.name}}: {{$ctrl.bigTeamTotal.team2.scriptureTotal | number:0}} pts</span>
+        <br>
+        <span ng-if="$ctrl.bigTeamTotal.team1.scriptureTotal > $ctrl.bigTeamTotal.team2.scriptureTotal"><b>2nd</b> {{$ctrl.bigTeamTotal.team2.name}}: {{$ctrl.bigTeamTotal.team2.scriptureTotal | number:0}} pts</span>
+        <span ng-if="$ctrl.bigTeamTotal.team1.scriptureTotal < $ctrl.bigTeamTotal.team2.scriptureTotal"><b>2nd</b> {{$ctrl.bigTeamTotal.team1.name}}: {{$ctrl.bigTeamTotal.team1.scriptureTotal | number:0}} pts</span>
+      </div>
+    </div>
+  </div>
+</div>
+<!--GRID-->
+<div ui-grid=$ctrl.gridOptions
+     ui-grid-resize-columns
+     ui-grid-exporter>
+</div>
+<br>
+<button class="btn btn-primary" ng-click="$ctrl.exportData()"><i class="fa fa-download"></i> Download CSV</button>
+<div class="text-center footer navbar-fixed-bottom" style="background: rgb(238,238,238)">
+  <ul class="pagination">
+    <li ng-repeat="i in [1,2,3,4,5,6,7,8,9,10]"
+        ng-class="{'active': i===$ctrl.week}"
+        ng-click="$ctrl.changeWeek(i)">
+      <a href="#">Week {{i}}</a></li>
+  </ul>
+</div>
+<br><br><br>
+<br><br><br>

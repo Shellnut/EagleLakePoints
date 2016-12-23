@@ -1,0 +1,32 @@
+<!-- Modal content-->
+<div class="modal-content">
+  <div class="modal-header">
+    <h4 class="modal-title"><i class="fa fa-user"></i> Login</h4>
+  </div>
+  <div class="modal-body">
+    <form name="userForm" novalidate> <!-- novalidate prevents HTML5 validation since we will be validating ourselves -->
+      <!-- NAME -->
+      <div class="form-group">
+        <label>Username</label>
+        <input type="text" placeholder="Username" class="form-control" ng-model="username" required>
+      </div>
+      <!-- PASSWORD -->
+      <div class="form-group">
+        <label>Password</label>
+        <input type="password" placeholder="Password" class="form-control" ng-model="password" required>
+      </div>
+      <!-- SUBMIT BUTTON -->
+      <button ng-click="ok()"
+              type="submit"
+              class="btn btn-primary">
+        <span>Submit</span>
+      </button>
+      <!--CANCEL-->
+      <button ng-click="cancel()"
+              type="submit"
+              class="btn btn-danger">
+        <span>Cancel</span>
+      </button>
+    </form>
+  </div>
+</div>

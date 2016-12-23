@@ -1,0 +1,21 @@
+<!-- Modal content-->
+<div class="modal-content">
+  <div class="modal-header">
+    <h4 class="modal-title"><i class="fa fa-pencil"></i> Edit Big Team Names</h4>
+  </div>
+  <div class="modal-body">
+    <div class="form-group">
+      <label>Big Team #1</label>
+      <input type="text" class="form-control" ng-model="$ctrl.bigTeamNames.team1">
+    </div>
+    <div class="form-group">
+      <label>Big Team #2</label>
+      <input type="text" class="form-control" ng-model="$ctrl.bigTeamNames.team2">
+    </div>
+    <p class="text-danger">Warning: Changing the big team names during the summer will mess up the data</p>
+  </div>
+  <div class="modal-footer">
+    <button ng-click="$ctrl.ok()" type="button" class="btn btn-primary">Save</button>
+    <button ng-click="$ctrl.cancel()" type="button" class="btn btn-danger">Cancel</button>
+  </div>
+</div>
